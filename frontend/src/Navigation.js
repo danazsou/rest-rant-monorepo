@@ -8,6 +8,19 @@ function Navigation() {
 
     const { currentUser } = useContext(CurrentUser)
 
+    let addPlaceButton = null
+
+if (currentUser?.role === 'admin') {
+    addPlaceButton = (
+        <li>
+            <a href="#" onClick={() => history.push("/places/new")}>
+                Add Place
+            </a>
+        </li>
+    )
+}
+
+
     let loginActions = (
         <>
             <li style={{ float: 'right' }}>
@@ -49,6 +62,7 @@ function Navigation() {
                         Add Place
                     </a>
                 </li>
+                {addPlaceButton}
                 {loginActions}
             </ul>
         </nav>
