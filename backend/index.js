@@ -7,7 +7,18 @@ const app = express();
 const cookieSessions=(require)('cookie-session')
 
 // Express Settings
-app.use(cors())
+
+app.use(cookieSession({
+    name: 'session',
+    keys: [ process.env.SESSION_SECRET ],
+    sameSite: 'strict',
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
+
+app.use(cors({
+    origin: 'http://localhost:5000',
+    credentials: true
+}))
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.json())
